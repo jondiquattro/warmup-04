@@ -1,18 +1,41 @@
 'use strict';
 
-const superAgent = require('superagent'); //This is what opens the server up to external api servers
-
-function fetchPeopleWithPromises(){
-   const urlArr=[];
-   superAgent.get('https://swapi.co/api/people')
-   .then( (result)=>{
-      result.body.results.forEach( (idx)=>{
-         urlArr.push(idx.url);
-      })
-      console.log(urlArr);
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 
-   })
-}
 
-fetchPeopleWithPromises();
+app.use(express.json());
+
+app.use((req,res,next)=>{
+   console.log(req.method, req.path);
+   next();
+})
+
+app.get('/', (req,res,next)=>{
+   res.send('hello')
+   
+});
+
+app.post('/save', (req,res,next)=>{
+   res.send({resonse: "saved your fake file!"});
+})
+
+app.get('/public', (req,res,next)=>{
+   
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))

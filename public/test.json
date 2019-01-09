@@ -1,0 +1,16 @@
+{
+    "posts": [
+      {
+        "id": 1,
+        "title": "React Rocks",
+        "author": "John",
+        "article": "React Is Really Cool"
+      },
+      {
+        "id": 2,
+        "title": "React Rocks",
+        "author": "John",
+        "article": "React Is Really Cool"
+      }
+    ]
+  }
