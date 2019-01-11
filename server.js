@@ -2,17 +2,21 @@
 
 const superAgent = require('superagent'); //This is what opens the server up to external api servers
 
+
 function fetchPeopleWithPromises(){
-   const urlArr=[];
+   const peopleArr=[];
+   
    superAgent.get('https://swapi.co/api/people')
    .then( (result)=>{
       result.body.results.forEach( (idx)=>{
-         urlArr.push(idx.url);
+         peopleArr.push(idx.url);
       })
-      console.log(urlArr);
+
+      console.log(peopleArr);
 
 
    })
 }
+
 
 fetchPeopleWithPromises();
