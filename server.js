@@ -5,18 +5,29 @@ const superAgent = require('superagent'); //This is what opens the server up to 
 
 function fetchPeopleWithPromises(){
    const peopleArr=[];
+   const promiseArr =[];
    
    superAgent.get('https://swapi.co/api/people')
    .then( (result)=>{
       result.body.results.forEach( (idx)=>{
          peopleArr.push(idx.url);
       })
-
-      console.log(peopleArr);
-
-
+      peopleArr.forEach( url =>{
+         promiseArr.push(superAgent.get(url));//creates array of promises
+         // console.log(promiseArr);
+      })
+      Promise.all(promiseArr)
+      .then(
+         console.log(promiseArr.length)
+      )
    })
+
+   return peopleArr;
 }
 
 
+
+
 fetchPeopleWithPromises();
+
+
