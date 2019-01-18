@@ -13,8 +13,7 @@ function fetchPeopleWithPromises(){
          peopleArr.push(idx.url);
       })
       peopleArr.forEach( url =>{
-         promiseArr.push(superAgent.get(url));//creates array of promises
-         // console.log(promiseArr);
+         promiseArr.push(superAgent.get(url));//creates array of promises"
       })
       Promise.all(promiseArr)
       .then(
