@@ -9,15 +9,20 @@ function fetchPeopleWithPromises(){
    
    superAgent.get('https://swapi.co/api/people')
    .then( (result)=>{
+
       result.body.results.forEach( (idx)=>{
          peopleArr.push(idx.url);
+
       })
       peopleArr.forEach( url =>{
+
          promiseArr.push(superAgent.get(url));//creates array of promises"
+         
       })
       Promise.all(promiseArr)
       .then(
          (result)=>{
+            
             for(let i =0; i< result.length; i++){
                console.log(result[i].body.name);
             }
