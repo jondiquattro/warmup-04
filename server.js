@@ -1,19 +1,22 @@
 'use strict';
 
 const superAgent = require('superagent'); 
-
+const peopleArr=[];
+const promiseArr =[];
 
 function fetchPeopleWithPromises(){
-   const peopleArr=[];
-   const promiseArr =[];
+
    
    superAgent.get('https://swapi.co/api/people')
    .then( (idx)=>{
+
+      // console.log(idx.body.results.length);
 
       idx.body.results.forEach( (idx)=>{
          peopleArr.push(idx.url);
 
       })
+// console.log(peopleArr);
       peopleArr.forEach( url =>{
 
          promiseArr.push(superAgent.get(url));
@@ -22,8 +25,8 @@ function fetchPeopleWithPromises(){
       Promise.all(promiseArr)
       .then(
          (idx)=>{
-
-            for(let i =0; i< result.length; i++){
+            // console.log(idx[0].body.name)
+            for(let i =0; i< idx.length; i++){
                console.log(idx[i].body.name);
             }
          }
@@ -34,8 +37,16 @@ function fetchPeopleWithPromises(){
 }
 
 
+async function fetchPeopleWithAsync(){
+   let SA =await superAgent.get('https://swapi.co/api/people');
+   
+   SA.body.results.forEach( (idx)=>{
+      console.log(idx.name);
+   })
+   
+}
+
+// fetchPeopleWithPromises();
 
 
-fetchPeopleWithPromises();
-
-
+fetchPeopleWithAsync();
